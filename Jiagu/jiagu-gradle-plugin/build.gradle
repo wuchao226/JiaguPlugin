@@ -1,0 +1,35 @@
+plugins {
+  id 'groovy'
+  id 'org.jetbrains.kotlin.jvm'
+}
+
+dependencies {
+  implementation 'com.android.tools.build:gradle:3.5.2'
+  implementation gradleApi()
+}
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_1_7
+  targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+apply plugin:'maven-publish'
+
+publishing{
+  publications{
+    Jiagu(MavenPublication){
+      from components.java  //要把源码生成的jar包上传
+      // 设置groupId，通常为包名
+      groupId 'com.wuc.jiagu'
+      // 设置artifactId，为当前插件的名称
+      artifactId "jiagu-gradle-plugin"
+      version "1.0.0"
+    }
+  }
+  repositories {
+    maven {
+      // 设置发布路径为 工程目录下面的 repo 文件夹
+      url uri("../repo")
+    }
+  }
+}

@@ -1,6 +1,13 @@
 plugins {
   id 'com.android.application'
   id 'org.jetbrains.kotlin.android'
+  id 'com.wuc.jiagu'
+}
+
+jiagu {
+  userName '360U3190525523'
+  password 'q8851551'
+  jiaguTools '/Users/wuchao/androidProjects/imooc/JiaguPlugin/Jiagu/jiagu_doc/jiagu/jiagu.jar'
 }
 
 android {
@@ -17,8 +24,18 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  signingConfigs {
+    release {
+      storeFile file('enjoy.keystore')
+      storePassword '123456'
+      keyAlias 'enjoy'
+      keyPassword '123456'
+    }
+  }
+
   buildTypes {
     release {
+      signingConfig signingConfigs.release
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
